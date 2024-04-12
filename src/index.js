@@ -1,10 +1,2 @@
-import React from 'react'
-import TableListing from './app/TableListing'
-
-export const App = () => {
-  return (
-    <>
-      <TableListing />
-    </>
-  )
-}
+export { default as TableListing } from './components/TableListing';
+export { default as ListElement } from './components/ListElement';
