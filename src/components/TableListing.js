@@ -2,8 +2,6 @@ import React from "react";
 import ListElement from "./ListElement";
 
 function TableListing(props) {
-    console.log("props in TableListing", props)
-
     return (
         <div className="list-container">
             {props.listTitle && <h2>{props.listTitle}</h2>}
