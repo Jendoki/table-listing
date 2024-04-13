@@ -14,7 +14,7 @@ function TableListing(props) {
         }
     };
 
-    const sortedListElements = props.listElements.slice().sort((a, b) => {
+    const sortedListElements = [...props.listElements].sort((a, b) => {
         if (!sortColumn) return 0;
 
         const aValue = a[sortColumn];
