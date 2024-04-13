@@ -38,7 +38,7 @@ function TableListing(props) {
                         {props.listTitles && props.listTitles.length > 0 ? props.listTitles.map(title =>
                             <th key={title} onClick={() => handleSort(title)}>
                                 {title} {sortColumn === title && (
-                                    sortDirection === 'asc' ? <>&uarr;</> : <>&darr;</>
+                                    sortDirection === 'asc' ? <div>&uarr;</div> : <div>&darr;</div>
                                 )}
                             </th>
                         ) : console.warn("Please provide a list of titles to TableListing with the listTitles props.")}
