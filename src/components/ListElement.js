@@ -4,9 +4,9 @@ function ListElement(props) {
     const values = Object.values(props.element);
 
     return (
-        <>
+        <div>
             {values.map((value, index) => <td key={index}>{value}</td>)}
-        </>
+        </div>
     );
 }
 
