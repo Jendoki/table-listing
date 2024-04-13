@@ -26,6 +26,7 @@ npm install --save table-listing
 import TableListing from 'table-listing'
 
 const listTitle = "Class 3 students"
+const listTitles = ["First Name", "Age"]
 const listElements = [
   {
     "name": "John",
@@ -40,7 +41,7 @@ const listElements = [
 function Example() {
   return (
     <>
-      <TableListing listTitle={listTitle} listElements={listElements}/>
+      <TableListing listTitle={listTitle} listTitles={listTitles} listElements={listElements}/>
     </>
   );
 }

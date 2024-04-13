@@ -20,6 +20,8 @@ function TableListing(props) {
         const aValue = a[sortColumn];
         const bValue = b[sortColumn];
 
+        if (aValue === undefined || bValue === undefined) return 0;
+
         if (aValue < bValue) {
             return sortDirection === 'asc' ? -1 : 1;
         }
@@ -38,15 +40,15 @@ function TableListing(props) {
                         {props.listTitles && props.listTitles.length > 0 ? props.listTitles.map(title =>
                             <th key={title} onClick={() => handleSort(title)}>
                                 {title} {sortColumn === title && (
-                                    sortDirection === 'asc' ? <div>&uarr;</div> : <div>&darr;</div>
+                                    sortDirection === 'asc' ? <>&uarr;</> : <>&darr;</>
                                 )}
                             </th>
                         ) : console.warn("Please provide a list of titles to TableListing with the listTitles props.")}
                     </tr>
                 </thead>
                 <tbody>
-                    {sortedListElements && sortedListElements.length > 0 ? sortedListElements.map(element =>
-                        <ListElement key={element.id} element={element} />
+                    {sortedListElements && sortedListElements.length > 0 ? sortedListElements.map((element, index) =>
+                        <ListElement key={index} element={element} />
                     ) : console.warn("Please provide a list of elements to TableListing with the listElements props.")}
                 </tbody>
             </table>
