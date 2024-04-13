@@ -13,7 +13,7 @@ function TableListing(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.listElement.map(element => <ListElement element={element} />)}
+                    {props.listElements.map(element => <ListElement element={element} />)}
                 </tbody>
             </table>
         </div>
