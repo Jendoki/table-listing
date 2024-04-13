@@ -16,6 +16,8 @@ npm install --save table-listing
 
 - `listTitle` (String): The title of your table.
 
+- `listTitles` (Array of Strings): The title of each column in your table.
+
 - `listElements` (Array of Objects): A list of objects where each object represents a row in the table. The properties of each object should always be the same, in the same order, and their values represent the data for each cell in the table.
 
 #### Example:
