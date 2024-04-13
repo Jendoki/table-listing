@@ -10,11 +10,11 @@ function TableListing(props) {
             <table className="list-table">
                 <thead>
                     <tr className="list-table-titles">
-                        {props.listTitles > 0 ? props.listTitles.map(title => <th>{title}</th>) : console.warn("Please provide a list of titles to TableListing with the listTitles props.")}
+                        {props.listTitles && props.listTitles.length > 0 ? props.listTitles.map(title => <th key={title}>{title}</th>) : console.warn("Please provide a list of titles to TableListing with the listTitles props.")}
                     </tr>
                 </thead>
                 <tbody>
-                    {props.listElements > 0 ? props.listElements.map(element => <ListElement element={element} />) : console.warn("Please provide a list of elements to TableListing with the listElements props.")}
+                    {props.listElements && props.listElements.length > 0 ? props.listElements.map(element => <ListElement key={element.id} element={element} />) : console.warn("Please provide a list of elements to TableListing with the listElements props.")}
                 </tbody>
             </table>
         </div>
