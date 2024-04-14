@@ -53,7 +53,7 @@ function TableListing(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.listElements && props.listElements.length > 0 ? props.listElements.map((element, index) => <ListElement key={index} element={element} />) : console.warn("Please provide a list of elements to TableListing with the listElements props.")}
+                    {currentListElements && currentListElements.length > 0 ? currentListElements.map((element, index) => <ListElement key={index} element={element} />) : console.warn("Please provide a list of elements to TableListing with the listElements props.")}
                 </tbody>
             </table>
         </div>
