@@ -1,9 +1,9 @@
 import React from "react";
 import ListElement from "./ListElement";
 import { useState, useEffect } from "react";
+import "../App.css"
 
 // TODO
-// - add search function
 // - add pagination
 
 function TableListing(props) {
@@ -39,7 +39,7 @@ function TableListing(props) {
     return (
         <div className="list-container">
             {props.listTitle && <h2>{props.listTitle}</h2>}
-            <div className="">
+            <div className="row-container">
                 <div>
                     <p>Show {entriesNumber} entries</p>
                 </div>
