@@ -10,7 +10,7 @@ function TableListing(props) {
 
     useEffect(() => {
         filterListElements(searchTerm, currentPage);
-    }, [searchTerm, currentPage]);
+    }, [searchTerm, currentPage, entriesNumber]);
 
     function filterListElements(searchTerm, page) {
         let filteredList = fullListElements;
@@ -36,6 +36,9 @@ function TableListing(props) {
     function onFormSubmit(e) {
         e.preventDefault();
     }
+
+    const startIndex = (currentPage - 1) * parseInt(entriesNumber, 10) + 1;
+    const endIndex = Math.min(currentPage * parseInt(entriesNumber, 10), fullListElements.length);
 
     return (
         <div className="list-container">
@@ -69,10 +72,15 @@ function TableListing(props) {
                     {currentListElements && currentListElements.length > 0 ? currentListElements.map((element, index) => <ListElement key={index} element={element} />) : console.warn("Please provide a list of elements to TableListing with the listElements props.")}
                 </tbody>
             </table>
-            <div className="pagination">
-                <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-                <span>{currentPage}</span>
-                <button onClick={() => onPageChange(currentPage + 1)} disabled={currentListElements.length < parseInt(entriesNumber, 10)}>Next</button>
+            <div className="pagi-and-counter-container">
+                <div className="pagination">
+                    <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+                    <span>{currentPage}</span>
+                    <button onClick={() => onPageChange(currentPage + 1)} disabled={currentListElements.length < parseInt(entriesNumber, 10)}>Next</button>
+                </div>
+                <div className="counter">
+                    Showing {startIndex} to {endIndex} out of {fullListElements.length} entries
+                </div>
             </div>
         </div>
     )
