@@ -1,7 +1,6 @@
 import React from "react";
 import ListElement from "./ListElement";
 import { useState, useEffect } from "react";
-import "../App.css"
 
 // TODO
 // - add pagination
