@@ -1,38 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ListElement from "./ListElement";
-import { useState, useEffect } from "react";
-
-// TODO
-// - add pagination
 
 function TableListing(props) {
-    const fullListElements = props.listElements
-    const [currentListElements, setCurrentListElements] = useState(fullListElements)
-    const [searchTerm, setSearchTerm] = useState("")
-    const [entriesNumber, setEntriesNumber] = useState("10")
-    let filteredList = []
+    const fullListElements = props.listElements;
+    const [currentListElements, setCurrentListElements] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [entriesNumber, setEntriesNumber] = useState("10");
+    const [currentPage, setCurrentPage] = useState(1);
 
-    function onFormSubmit(e) {
-        e.preventDefault();
-    }
+    useEffect(() => {
+        filterListElements(searchTerm, currentPage);
+    }, [searchTerm, currentPage]);
 
-    function filterListElements(searchTerm) {
-        if (searchTerm === "") {
-            setCurrentListElements(fullListElements)
-        } else {
+    function filterListElements(searchTerm, page) {
+        let filteredList = fullListElements;
+
+        if (searchTerm !== "") {
             filteredList = fullListElements.filter(element => {
                 const values = Object.values(element);
                 return values.some(value =>
                     value.toString().toLowerCase().includes(searchTerm.toLowerCase())
                 );
             });
-            setCurrentListElements(filteredList);
         }
+
+        const startIndex = (page - 1) * parseInt(entriesNumber, 10);
+        const endIndex = startIndex + parseInt(entriesNumber, 10);
+        setCurrentListElements(filteredList.slice(startIndex, endIndex));
     }
 
-    useEffect(() => {
-        filterListElements(searchTerm);
-    }, [searchTerm]);
+    function onPageChange(page) {
+        setCurrentPage(page);
+    }
+
+    function onFormSubmit(e) {
+        e.preventDefault();
+    }
 
     return (
         <div className="list-container">
@@ -66,6 +69,11 @@ function TableListing(props) {
                     {currentListElements && currentListElements.length > 0 ? currentListElements.map((element, index) => <ListElement key={index} element={element} />) : console.warn("Please provide a list of elements to TableListing with the listElements props.")}
                 </tbody>
             </table>
+            <div className="pagination">
+                <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+                <span>{currentPage}</span>
+                <button onClick={() => onPageChange(currentPage + 1)} disabled={currentListElements.length < parseInt(entriesNumber, 10)}>Next</button>
+            </div>
         </div>
     )
 }
