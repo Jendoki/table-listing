@@ -28,7 +28,6 @@ function TableListing(props) {
             });
             setCurrentListElements(filteredList);
         }
-        console.log("filtered list", currentListElements)
     }
 
     useEffect(() => {
@@ -39,8 +38,16 @@ function TableListing(props) {
         <div className="list-container">
             {props.listTitle && <h2>{props.listTitle}</h2>}
             <div className="row-container">
-                <div>
-                    <p>Show {entriesNumber} entries</p>
+                <div className="entries-container">
+                    <p>Show </p>
+                    <form className="entries-form" onSubmit={onFormSubmit}>
+                        <select id="entries" name="entries" onChange={(e) => setEntriesNumber(e.target.value)}>
+                            <option value="5" selected={entriesNumber === "5"}>5</option>
+                            <option value="10" selected={entriesNumber === "10"}>10</option>
+                            <option value="20" selected={entriesNumber === "20"}>20</option>
+                        </select>
+                    </form>
+                    <p> entries</p>
                 </div>
                 <div>
                     <form className="search-form" onSubmit={onFormSubmit}>
