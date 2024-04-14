@@ -13,6 +13,10 @@ function TableListing(props) {
     const [entriesNumber, setEntriesNumber] = useState("10")
     let filteredList = []
 
+    function onFormSubmit(e) {
+        e.preventDefault();
+    }
+
     function filterListElements(searchTerm) {
         if (searchTerm === "") {
             setCurrentListElements(fullListElements)
@@ -40,7 +44,7 @@ function TableListing(props) {
                     <p>Show {entriesNumber} entries</p>
                 </div>
                 <div>
-                    <form className="search-form">
+                    <form className="search-form" onSubmit={onFormSubmit}>
                         <label htmlFor="search">Search:</label>
                         <input type="text" id="search" name="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                     </form>
