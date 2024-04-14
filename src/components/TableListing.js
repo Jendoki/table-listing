@@ -1,6 +1,6 @@
 import React from "react";
 import ListElement from "./ListElement";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // TODO
 // - add search function
