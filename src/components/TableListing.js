@@ -38,7 +38,7 @@ function TableListing(props) {
     }
 
     const startIndex = (currentPage - 1) * parseInt(entriesNumber, 10) + 1;
-    const endIndex = Math.min(currentPage * parseInt(entriesNumber, 10), currentListElements.length);
+    const endIndex = Math.min(currentPage * parseInt(entriesNumber, 10), fullListElements.length);
 
     return (
         <div className="list-container">
@@ -79,7 +79,7 @@ function TableListing(props) {
                     <button onClick={() => onPageChange(currentPage + 1)} disabled={currentListElements.length < parseInt(entriesNumber, 10)}>Next</button>
                 </div>
                 <div className="counter">
-                    Showing {startIndex} to {endIndex} out of {currentListElements.length} entries
+                    Showing {startIndex} to {endIndex} out of {fullListElements.length} entries
                 </div>
             </div>
         </div>
