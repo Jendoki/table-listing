@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import ListElement from "./ListElement";
 
 function TableListing(props) {
-    console.log("Props in TableListing", props)
-
     const fullListElements = props.listElements;
     const [currentListElements, setCurrentListElements] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -12,7 +10,7 @@ function TableListing(props) {
 
     useEffect(() => {
         filterListElements(searchTerm, currentPage);
-    }, [searchTerm, currentPage, entriesNumber]);
+    }, [searchTerm, currentPage, entriesNumber, fullListElements]);
 
     function filterListElements(searchTerm, page) {
         let filteredList = fullListElements;
