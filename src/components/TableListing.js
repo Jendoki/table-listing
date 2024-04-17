@@ -95,10 +95,10 @@ function TableListing(props) {
                 <div className="entries-container">
                     <p>Show </p>
                     <form className="entries-form" onSubmit={onFormSubmit}>
-                        <select id="entries" name="entries" onChange={(e) => setEntriesNumber(e.target.value)}>
-                            <option value="5" selected={entriesNumber === "5"}>5</option>
-                            <option value="10" selected={entriesNumber === "10"}>10</option>
-                            <option value="20" selected={entriesNumber === "20"}>20</option>
+                        <select id="entries" name="entries" value={entriesNumber} onChange={(e) => setEntriesNumber(e.target.value)}>
+                            {[5, 10, 20].map(value => (
+                                <option key={value} value={value}>{value}</option>
+                            ))}
                         </select>
                     </form>
                     <p> entries</p>
@@ -121,12 +121,12 @@ function TableListing(props) {
                                     sortDirection === 'asc' ? '▲' : '▼'
                                 )}
                             </th>
-                        )) : console.warn("Please provide a list of titles to TableListing with the listTitles props.")}
+                        )) : null}
                     </tr>
                 </thead>
                 {/* Render the table body with list elements */}
                 <tbody>
-                    {currentListElements && currentListElements.length > 0 ? currentListElements.map((element, index) => <ListElement key={index} element={element} />) : console.warn("Please provide a list of elements to TableListing with the listElements props.")}
+                    {currentListElements && currentListElements.length > 0 ? currentListElements.map((element, index) => <ListElement key={index} element={element} />) : null}
                 </tbody>
             </table>
             {/* Render pagination and entry counter */}
