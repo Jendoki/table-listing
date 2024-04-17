@@ -116,7 +116,11 @@ function TableListing(props) {
                     <tr className="list-table-titles">
                         {/* Render each table header based on the list titles */}
                         {props.listTitles && props.listTitles.length > 0 ? props.listTitles.map((titleObj, index) => (
-                            <th key={index} onClick={() => handleColumnSort(titleObj.elementLabel)}>{titleObj.label}</th>
+                            <th key={index} onClick={() => handleColumnSort(titleObj.elementLabel)}>
+                                {titleObj.label} {sortColumn === titleObj.elementLabel && (
+                                    sortDirection === 'asc' ? '▲' : '▼'
+                                )}
+                            </th>
                         )) : console.warn("Please provide a list of titles to TableListing with the listTitles props.")}
                     </tr>
                 </thead>
