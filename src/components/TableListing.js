@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ListElement from "./ListElement";
 
 function TableListing(props) {
-    // State variables to manage the current list elements, search term, number of entries per page, current page number, 
-    // sort column, and sort direction.
+    // State variables
     const fullListElements = props.listElements;
     const [currentListElements, setCurrentListElements] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -18,10 +17,12 @@ function TableListing(props) {
         filterListElements(searchTerm, currentPage);
     }, [searchTerm, currentPage, entriesNumber, fullListElements, sortColumn, sortDirection]);
 
-    // Function to filter the list elements based on the search term, current page, and sort options.
-    function filterListElements(searchTerm, page) {
+
+    // Filter list elements based on search term, current page, and sort options
+    const filterListElements = useCallback((searchTerm, page) => {
         let filteredList = fullListElements;
 
+        // Filter based on search term
         if (searchTerm !== "") {
             filteredList = fullListElements.filter(element => {
                 const values = Object.values(element);
@@ -31,6 +32,7 @@ function TableListing(props) {
             });
         }
 
+        // Sort based on sort options
         if (sortColumn) {
             filteredList = filteredList.slice().sort((a, b) => {
                 const valueA = a[sortColumn];
@@ -50,42 +52,42 @@ function TableListing(props) {
             });
         }
 
+        // Pagination
         const startIndex = (page - 1) * parseInt(entriesNumber, 10);
         const endIndex = startIndex + parseInt(entriesNumber, 10);
         setCurrentListElements(filteredList.slice(startIndex, endIndex));
-    }
+    }, [fullListElements, searchTerm, sortColumn, sortDirection, entriesNumber]);
 
-    // Function to handle page change.
-    function onPageChange(page) {
-        setCurrentPage(page);
-    }
-
-    // Function to handle form submission (prevents default behavior).
-    function onFormSubmit(e) {
-        e.preventDefault();
-    }
-
-    // Function to handle column sorting. Updates the sort column and direction.
-    function handleColumnSort(column) {
+    // Handle column sorting
+    const handleColumnSort = useCallback((column) => {
         if (column === sortColumn) {
             setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
         } else {
             setSortColumn(column);
             setSortDirection('asc');
         }
-    }
+    }, [sortColumn, sortDirection]);
 
-    // Function to get the type of a column from the list titles.
+    // Handle page change
+    const onPageChange = useCallback((page) => {
+        setCurrentPage(page);
+    }, []);
+
+    // Get the type of a column from the list titles
     function getColumnType(column) {
         const titleObj = props.listTitles.find(title => title.elementLabel === column);
         return titleObj ? titleObj.type : null;
     }
 
-    // Calculate the start and end index of the displayed entries.
+    function onFormSubmit(e) {
+        e.preventDefault();
+    }
+
+    // Calculate the start and end index of the displayed entries
     const startIndex = (currentPage - 1) * parseInt(entriesNumber, 10) + 1;
     const endIndex = Math.min(currentPage * parseInt(entriesNumber, 10), fullListElements.length);
 
-    // Render the table listing component.
+    // Render the table listing component
     return (
         <div className="list-container">
             {/* Render the list title if provided */}
