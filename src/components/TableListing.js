@@ -65,7 +65,9 @@ function TableListing(props) {
             <table className="list-table">
                 <thead>
                     <tr className="list-table-titles">
-                        {props.listTitles && props.listTitles.length > 0 ? props.listTitles.map(title => <th key={title}>{title}</th>) : console.warn("Please provide a list of titles to TableListing with the listTitles props.")}
+                        {props.listTitles && props.listTitles.length > 0 ? props.listTitles.map(titleObj => (
+                            <th key={titleObj.elementLabel}>{titleObj.label}</th>
+                        )) : console.warn("Please provide a list of titles to TableListing with the listTitles props.")}
                     </tr>
                 </thead>
                 <tbody>
