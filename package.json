@@ -1,6 +1,6 @@
 {
   "name": "table-listing",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Reusable React library for displaying tabular data with filtering, pagination, and search functionality",
   "author": "Jendoki",
   "license": "MIT",
